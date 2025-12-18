@@ -7,8 +7,9 @@ const app = express();
 dotenv.config()
 
 const MONGO_URI = process.env.MONGO_URI
+const CLIENT_URI=process.env.CLIENT_URI
 // Middleware
-app.use(cors());
+app.use(cors(CLIENT_URI));
 app.use(express.json({ limit: '50mb' }));
 
 // Database Connection
@@ -18,6 +19,10 @@ mongoose.connect(MONGO_URI)
 
 // Routes
 app.use('/api', marksRoutes);
+
+app.get('/', (req, res)=>{
+  return res.status(200).send("Hi")
+})
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
