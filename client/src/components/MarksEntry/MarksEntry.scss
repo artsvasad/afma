@@ -1,14 +1,11 @@
+/* MarksEntry.scss */
 .marks-entry-container {
   padding: 20px;
   background: #f8f9fa;
-  /* FIX: Use 100vh but subtract any potential external navbar height if necessary.
-     'overflow: hidden' prevents the body from scrolling, forcing the scroll 
-     to happen only inside the table-wrapper.
-  */
-  height: 100vh; 
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; 
+  overflow: hidden;
   box-sizing: border-box;
 
   .add-student-bar {
@@ -20,7 +17,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    flex-shrink: 0; /* Ensures the header doesn't shrink */
+    flex-shrink: 0;
 
     h3 {
       margin: 0;
@@ -37,9 +34,14 @@
         padding: 8px;
         border: 1px solid #cbd5e0;
         border-radius: 4px;
-        
-        &.input-roll { width: 80px; }
-        &.input-name { width: 250px; }
+
+        &.input-roll {
+          width: 80px;
+        }
+
+        &.input-name {
+          width: 250px;
+        }
       }
 
       button {
@@ -50,14 +52,13 @@
         border-radius: 4px;
         cursor: pointer;
         font-weight: bold;
-        &:hover { background: #2b6cb0; }
       }
     }
   }
 
   .status-bar {
     position: fixed;
-    bottom: 30px; /* Moved up slightly to clear the scrollbar area */
+    bottom: 30px;
     left: 20px;
     background: #2d3748;
     color: white;
@@ -65,65 +66,50 @@
     border-radius: 4px;
     font-weight: bold;
     z-index: 2000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 
-    &.saving { background: #d69e2e; color: black; }
-    &.saved { background: #38a169; }
-    &.error { background: #e53e3e; }
+    &.saving {
+      background: #d69e2e;
+      color: black;
+    }
+
+    &.saved {
+      background: #38a169;
+    }
+
+    &.error {
+      background: #e53e3e;
+    }
   }
 
   .table-wrapper {
     background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    
-    /* FIX: flex-grow ensures this area takes all remaining vertical space.
-       We add 100px padding-bottom inside the scrollable area so the last 
-       row never gets covered by the scrollbar or the status badge.
-    */
     flex-grow: 1;
-    overflow: auto; 
+    overflow: auto;
     position: relative;
     border: 1px solid #e2e8f0;
-    padding-bottom: 100px; 
-
-    /* Improved Scrollbar visibility */
-    &::-webkit-scrollbar {
-      height: 12px; /* Thicker horizontal scroll for better accessibility */
-      width: 10px;
-    }
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #cbd5e0;
-      border-radius: 10px;
-      border: 2px solid #f1f1f1;
-      &:hover { background: #a0aec0; }
-    }
+    padding-bottom: 100px;
 
     table {
       width: 100%;
-      min-width: max-content; 
-      border-collapse: separate; 
+      min-width: max-content;
+      border-collapse: separate;
       border-spacing: 0;
 
       thead {
         position: sticky;
         top: 0;
         z-index: 100;
-        
+
         th {
           background: #fff;
           border: 1px solid #e2e8f0;
           text-align: center;
           padding: 10px;
-          white-space: nowrap;
         }
 
-        /* Sub-header (Term, MT, Total) offset */
         tr:nth-child(2) th {
-          top: 41px; 
+          top: 41px;
         }
       }
 
@@ -134,7 +120,7 @@
         background: #fff;
       }
 
-      /* Frozen Columns: Roll and Name */
+      /* Optimized Frozen Columns: SIT PERFECTLY NEXT TO EACH OTHER */
       .fixed-col {
         position: sticky;
         left: 0;
@@ -142,55 +128,57 @@
         z-index: 10;
         border-right: 2px solid #e2e8f0;
 
+        &.roll-col {
+          width: 65px;
+          min-width: 65px;
+          padding: 8px 4px;
+        }
+
         &.name-col {
-          left: 80px; 
-          min-width: 220px;
+          left: 65px;
+          min-width: 200px;
           text-align: left;
         }
       }
 
-      /* Corner cell where both headers are sticky */
-      thead th.fixed-col {
-        z-index: 110;
-      }
-
-      /* Editable Input Styles */
       .edit-metadata-input {
         border: 1px solid transparent;
         background: transparent;
         width: 100%;
         padding: 5px;
-        font-size: 0.95rem;
 
-        &:focus {
-          outline: none;
-          background: #f7fafc;
-          border-bottom: 2px solid #3182ce;
+        &.roll-edit {
+          font-weight: bold;
+          text-align: center;
         }
-
-        &.roll-edit { font-weight: bold; text-align: center; }
-        &.name-edit { text-align: left; }
       }
 
       .student-id-subtext {
         font-size: 0.7rem;
         color: #a0aec0;
-        display: block;
       }
 
-      /* Visual grouping for subjects */
-      .subject-header { background: #2b6cb0; color: white; }
-      .sub-th { background: #ebf8ff; font-size: 0.8rem; }
-      .total-cell { font-weight: bold; background: #f7fafc; color: #2c5282; }
+      .subject-header {
+        background: #2b6cb0;
+        color: white;
+      }
 
-      /* Mark input fields */
+      .sub-th {
+        background: #ebf8ff;
+        font-size: 0.8rem;
+      }
+
+      .total-cell {
+        font-weight: bold;
+        background: #f7fafc;
+      }
+
       input:not(.edit-metadata-input) {
         width: 50px;
         text-align: center;
         border: 1px solid #edf2f7;
         border-radius: 4px;
         padding: 4px;
-        &:focus { border-color: #3182ce; background: #ebf8ff; outline: none; }
       }
 
       .delete-btn {
@@ -198,7 +186,6 @@
         background: none;
         border: none;
         cursor: pointer;
-        &:hover { color: #c53030; background: #fff5f5; border-radius: 4px; }
       }
     }
   }

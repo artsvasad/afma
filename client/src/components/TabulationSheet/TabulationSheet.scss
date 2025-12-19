@@ -1,5 +1,4 @@
 /* TabulationSheet.scss */
-
 .tabulation-container {
   padding: 20px;
   background: #555;
@@ -38,7 +37,6 @@
   }
 }
 
-/* Page base styling  */
 .landscape-a4 {
   width: 297mm;
   min-height: 210mm;
@@ -52,7 +50,6 @@
   flex-direction: column;
 }
 
-/* PDF MODE: Strips away preview styles to fix "drift" and "blank pages"  */
 .pdf-mode {
   background: white !important;
   width: 297mm !important;
@@ -64,24 +61,16 @@
     box-shadow: none !important;
     border: none;
     padding: 10mm !important;
-
-    /* Let height be natural for open visibility  */
     height: auto !important;
     min-height: 209mm !important;
-    overflow: visible;
-
-    /* Isolate pages  */
-    break-after: page;
-    page-break-after: always;
   }
 
-  .landscape-a4:last-child {
-    page-break-after: avoid !important;
-    break-after: avoid !important;
+  .landscape-a4:not(:last-child) {
+    page-break-after: always;
+    break-after: page;
   }
 }
 
-/* Header styling  */
 .sheet-header {
   position: relative;
   text-align: center;
@@ -120,7 +109,6 @@
   }
 }
 
-/* Table styling  */
 .tabulation-table {
   width: 100%;
   border-collapse: collapse;
@@ -173,7 +161,6 @@
   }
 }
 
-/* Signature Section: 100px gap as requested  */
 .signature-section {
   margin-top: 100px;
   text-align: right;
