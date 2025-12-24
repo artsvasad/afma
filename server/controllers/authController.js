@@ -1,16 +1,16 @@
 import Admin from '../models/Admin.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
+import { JWT_SECRET } from '../config.js'; // Import centralized secret
 
-
-const JWT_SECRET = process.env.JWT_SECRET;
-
-// 1. Register (Run this once via Postman to create your admin, then delete/hide this route)
+// 1. Register
 export const registerAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
+    // Check if admin already exists
+    const existing = await Admin.findOne({ username });
+    if (existing) return res.status(400).json({ error: "Admin already exists" });
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const admin = new Admin({ username, password: hashedPassword });
     await admin.save();
@@ -31,10 +31,13 @@ export const loginAdmin = async (req, res) => {
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    // Create Token
+    // Generate Token
     const token = jwt.sign({ id: admin._id }, JWT_SECRET, { expiresIn: '1d' });
+    
+    console.log(`Login successful for: ${username}`);
     res.json({ token, username: admin.username });
   } catch (error) {
+    console.error("Login Error:", error);
     res.status(500).json({ error: error.message });
   }
 };
