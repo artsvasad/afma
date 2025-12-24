@@ -52,6 +52,7 @@ const PrintLayout = ({ students, selectedClass, selectedGroup, selectedVersion }
       <header className="school-header">
         <img src={logo} alt="Logo" className="school-logo" />
         <h1>AL-FALAH MODEL ACADEMY</h1>
+        <em>A concern of <strong>Shahid Cadet Academy, Uttara</strong></em>
         <p className="address">Dhaka, Bangladesh | ESTD: 2005</p>
         <div className="exam-title"><h2>YEARLY EXAM - 2025</h2></div>
         <div className="student-info-grid">

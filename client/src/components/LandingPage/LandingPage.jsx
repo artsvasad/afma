@@ -10,7 +10,7 @@ const LandingPage = ({ onLoginClick }) => {
           <img src={logo} alt="Logo" />
           <div className="brand-details">
             <span>AL-FALAH MODEL ACADEMY</span>
-          <span className='desc-concern'>A concern of Shahid Cadet Academy, Uttara</span>
+          <span className='desc-concern'><em>A concern of <strong>Shahid Cadet Academy, Uttara</strong></em></span>
           </div>
         </div>
         <button onClick={onLoginClick} className="login-btn">Admin Login</button>
